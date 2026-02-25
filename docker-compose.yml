@@ -6,4 +6,4 @@ services:
       context: docker
       args:
         TAG: ${TAG:-master}
-    image: simple-service:${TAG:-master}
+    image: blinkker/simple-service:${TAG:-master}
