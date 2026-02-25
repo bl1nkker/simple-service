@@ -1,0 +1,9 @@
+version: "3.3"
+
+services:
+  simple:
+    build:
+      context: docker
+      args:
+        TAG: ${TAG:-master}
+    image: simple-service:${TAG:-master}
