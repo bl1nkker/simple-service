@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'GIT_REPOSITORY_BRANCH', defaultValue: 'master', description: 'Docker image tag')
+        string(name: 'GIT_REPOSITORY_BRANCH', defaultValue: 'master', description: 'Git repository branch')
         booleanParam(name: 'DRY_RUN', defaultValue: true, description: 'Run Ansible in check mode')
         string(name: 'EXTRA_ARGS', defaultValue: '', description: 'Ansible extra variable')
     }
@@ -28,7 +28,8 @@ pipeline {
                 script {
                     def playbookPath = 'ansible/main.yml'
                     def inventory = params.GIT_REPOSITORY_BRANCH.contains('master') ? 'ansible/inventories/production' : 'ansible/inventories/staging'
-                    def baseVersion = sh(script: "git tag --sort=-v:refname | head -n 1", returnStdout: true).trim()
+                    // Get latest tag of the branch
+                    def baseVersion = sh(script: "git describe --tags --abbrev=0", returnStdout: true).trim()
                     echo "Latest git tag: ${baseVersion}"
                     env.IMAGE_TAG = resolveBaseTag(baseVersion)
                     echo "Resolved base Docker tag: ${env.IMAGE_TAG}"
@@ -99,13 +100,13 @@ pipeline {
 def resolveBaseTag(version){
   // Resolves the tag that will be used to pull the image (depending on the branch)
   if (params.GIT_REPOSITORY_BRANCH == "master"){
-    // if branch = master, then the base tag must be the “<version>
+    // if branch = master, then the base tag must be the "<version>""
     return "${version}"
   } else if (params.GIT_REPOSITORY_BRANCH == "staging"){
-    // if branch = staging, then the base tag must be the “<version>-staging”
+    // if branch = staging, then the base tag must be the "<version>-staging"
     return "${version}-staging"
   } else {
-    // if it is a feature branch, then the pipeline must PULL images with a tag that corresponds to “git describe --tags” (ex: 1.0.1-1-g22c39cc)
+    // if it is a feature branch, then the pipeline must PULL images with a tag that corresponds to "git describe --tags" (ex: 1.0.1-1-g22c39cc)
     return sh(script: "git describe --tags", returnStdout: true).trim()
   }
 }
