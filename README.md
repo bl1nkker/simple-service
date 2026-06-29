@@ -15,3 +15,4 @@ testcase proper staging (features) -> master (впвапвапващпващзп
 
 
 testcase proper hotfix -> master (realone)
+testcase proper feature -> staging (realone)
