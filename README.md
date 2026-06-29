@@ -8,3 +8,4 @@ test case#3.2
 test case#3.3
 
 testcase hotfix -> master
+testcase proper hotfix -> master
