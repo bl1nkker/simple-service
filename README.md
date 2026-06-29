@@ -11,3 +11,4 @@ testcase hotfix -> master
 testcase proper hotfix -> master
 testcase proper staging (bugfix only) -> master (p2)
 testcase proper staging (features) -> master
+testcase proper staging (features) -> master (впвапвапващпващзпвшапвашпзвща)
