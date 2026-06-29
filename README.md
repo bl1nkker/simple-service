@@ -10,3 +10,4 @@ test case#3.3
 testcase hotfix -> master
 testcase proper hotfix -> master
 testcase proper staging (bugfix only) -> master (p2)
+testcase proper staging (features) -> master
