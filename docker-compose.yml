@@ -1,9 +1,27 @@
 version: "3.3"
 
 services:
-  simple:
+  simple1:
     build:
       context: docker
       args:
         TAG: ${TAG:-master}
-    image: blinkker/simple-service:${TAG:-master}
+    image: blinkker/simple-service-1:${TAG:-master}
+  simple2:
+    build:
+      context: docker
+      args:
+        TAG: ${TAG:-master}
+    image: blinkker/simple-service-2:${TAG:-master}
+  simple3:
+    build:
+      context: docker
+      args:
+        TAG: ${TAG:-master}
+    image: blinkker/simple-service-3:${TAG:-master}
+  simple4:
+    build:
+      context: docker
+      args:
+        TAG: ${TAG:-master}
+    image: blinkker/simple-service-4:${TAG:-master}
